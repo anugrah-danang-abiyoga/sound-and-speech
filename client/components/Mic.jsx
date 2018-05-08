@@ -1,7 +1,7 @@
-import React from 'react'
-import Mic from 'react-mic'
+import React from 'react';
+import { ReactMic } from 'react-mic';
 
-export class Mic extends React.Component {
+export default class Mic extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -9,20 +9,22 @@ export class Mic extends React.Component {
       }
       this.startRecording = this.startRecording.bind(this)
       this.stopRecording = this.stopRecording.bind(this)
+      this.onData = this.onData.bind(this)
+      this.onStop = this.onStop.bind(this)
     }
    
-    startRecording () => {
+    startRecording() {
       this.setState({
         record: true
       });
     }
    
-    stopRecording () => {
+    stopRecording() {
       this.setState({
         record: false
       });
     }
-   
+
     onData(recordedBlob) {
       console.log('chunk of real-time data is: ', recordedBlob);
     }
@@ -33,16 +35,20 @@ export class Mic extends React.Component {
    
     render() {
       return (
-        <div>
-          <Mic
-            record={this.state.record}
-            className="sound-wave"
-            onStop={this.onStop}
-            strokeColor="#000000"
-            backgroundColor="#FF4081" />
-          <button onTouchTap={this.startRecording} type="button">Start</button>
-          <button onTouchTap={this.stopRecording} type="button">Stop</button>
-        </div>
-      );
+          <div>
+            <div id="mic">
+              <ReactMic
+                record={this.state.record}
+                className="sound-wave"
+                onStop={this.onStop}
+                strokeColor="#000000"
+                backgroundColor="#FF4081" />
+            </div>
+            <div id="button">
+              <button onTouchTap={this.startRecording} type="button">Start</button>
+              <button onTouchTap={this.stopRecording} type="button">Stop</button>
+            </div>
+          </div>
+        )
     }
   }

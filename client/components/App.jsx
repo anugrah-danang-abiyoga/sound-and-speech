@@ -5,11 +5,13 @@ import Speech from './Speech'
 import Mic from './Mic'
 
 const App = props => {
-    return (<Router>
+    return (
+    <Router>
         <div>
-            <Speech />
-            <Mic />
+            <Route exact path="/" component={Speech} />
+            <Route path="/Mic" component={Mic}/>
             <p>hello</p>
+            {/* <h1>try "export default class...." on line 4 of Mic instead :)</h1> */}
         </div>
     </Router>)
 }
